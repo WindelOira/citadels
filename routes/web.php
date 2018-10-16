@@ -18,3 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['auth'])->group(function() {
+	Route::get('/admin', function() {
+		return view('admin.index');
+	});
+
+	Route::resource('/admin/users', 'AdminUsersController');
+	Route::resource('/admin/medias', 'AdminMediasController');
+	Route::resource('/admin/orders', 'AdminOrdersController');
+	Route::resource('/admin/products', 'AdminProductsController');
+});
