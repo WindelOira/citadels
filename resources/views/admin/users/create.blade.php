@@ -6,7 +6,8 @@
   @endpage_header
 
   {!! Form::open([
-    
+    'route'     => 'admin.users.store',
+    'files'     => TRUE,
   ]) !!}
   <div class="row">
     <div class="col-lg-4">
@@ -21,7 +22,7 @@
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item px-4">
-            
+            {{ Form::bsSelect('role', array_pluck($roles, 'title', 'id')) }}
           </li>
         </ul>
       </div>

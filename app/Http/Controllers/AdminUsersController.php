@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Role;
+use App\User;
+use App\UserMeta;
+use App\Http\Requests\AdminUsersRequests;
+
 class AdminUsersController extends Controller
 {
     /**
@@ -13,7 +18,7 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        //
+      return view('admin.users.index');
     }
 
     /**
@@ -23,7 +28,9 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
-        //
+      $roles = Role::all();
+
+      return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -32,7 +39,7 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminUsersRequests $request)
     {
         //
     }
@@ -56,7 +63,9 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        //
+      $roles = Role::all();
+
+      return view('admin.users.edit', compact('roles'));
     }
 
     /**
@@ -66,7 +75,7 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdminUsersRequests $request, $id)
     {
         //
     }

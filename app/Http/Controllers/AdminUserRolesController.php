@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use App\Role;
+use App\Http\Requests\RolesRequests;
 
 class AdminUserRolesController extends Controller
 {
@@ -39,7 +40,7 @@ class AdminUserRolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(\App\Http\Requests\RolesRequests $request)
+    public function store(RolesRequests $request)
     {
       Role::create($request->all());
 
@@ -80,7 +81,7 @@ class AdminUserRolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(\App\Http\Requests\RolesRequests $request, $id)
+    public function update(RolesRequests $request, $id)
     {
       $data = $request->only(['title']);
       $data['slug'] = Str::slug($data['title']);
