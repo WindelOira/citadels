@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
+  @page_header(['title' => 'New Product'])
+    Products
+  @endpage_header
+
 	<div class="row">
 		<div class="col-lg-9 col-md-12">
             <!-- Add New Post Form -->

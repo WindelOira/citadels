@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Blade;
+
+use Form;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +18,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        Blade::component('components.partials.page-header', 'page_header');
+
+        Form::component('bsText', 'components.forms.text', ['name', 'value' => NULL, 'attr' => []]);
+        Form::component('bsEmail', 'components.forms.email', ['name', 'value' => NULL, 'attr' => []]);
+        Form::component('bsPassword', 'components.forms.password', ['name', 'attr' => []]);
+        Form::component('bsTextarea', 'components.forms.textarea', ['name', 'value' => NULL, 'attr' => []]);
+        Form::component('bsSelect', 'components.forms.select', ['name', 'options' => [], 'default' => NULL, 'attr' => []]);
+        Form::component('bsButton', 'components.forms.button', ['name', 'value' => NULL, 'type' => 'button', 'attr' => []]);
     }
 
     /**

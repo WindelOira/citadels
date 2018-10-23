@@ -18,7 +18,4 @@ mix
 ], 'public/assets/scripts/admin.js')
 .sass('resources/assets/sass/app.scss', 'public/assets/styles')
 .sass('resources/assets/sass/admin/shards-dashboards.scss', 'public/assets/styles/admin.css')
-.sass('resources/assets/sass/admin/extras.scss', 'public/assets/styles/admin.css')
-.styles([
-	'resources/assets/styles/shards-dashboards.1.2.0.min.css'
-], 'public/assets/styles/admin.css');
+.sass('resources/assets/sass/admin/extras.scss', 'public/assets/styles/admin.css');

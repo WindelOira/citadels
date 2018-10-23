@@ -11,6 +11,7 @@ window.Vue = require('vue');
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'shards-ui/dist/css/shards.css';
+import '../../../resources/assets/styles/shards-dashboards.1.2.0.min.css';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -22,3 +23,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const app = new Vue({
     el: '#app'
 });
+
+// (function($) {
+//   $(function() {
+//     $('.is-datatable').DataTable();
+//   });
+// })(jQuery);

@@ -1,0 +1,1 @@
+<button class="btn {{ array_has($attr, 'class') ? $attr['class'] : NULL }}" type="{{ $type }}" name="{{ $name }}" value="{{ $value }}">{{ array_has($attr, 'title') ? $attr['title'] : NULL }}</button>
