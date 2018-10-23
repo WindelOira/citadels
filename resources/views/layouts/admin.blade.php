@@ -182,6 +182,9 @@
   					</nav>
   					<!--./ Main Navbar -->
 
+            @includeWhen(session()->has('success'), 'components.alerts.success')
+            @includeWhen(session()->has('deleted'), 'components.alerts.deleted')
+
   					<!-- Main Content -->
   					<div class="main-content-container container-fluid px-4">
   						@yield('content')

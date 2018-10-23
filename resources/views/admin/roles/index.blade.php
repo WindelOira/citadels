@@ -5,9 +5,6 @@
     Users
   @endpage_header
 
-  @includeWhen(session()->has('success'), 'components.alerts.success')
-  @includeWhen(session()->has('deleted'), 'components.alerts.deleted')
-
   <div class="row">
     <div class="col-lg-4">
       {!! Form::open([

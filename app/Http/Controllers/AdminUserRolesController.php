@@ -43,6 +43,8 @@ class AdminUserRolesController extends Controller
     {
       Role::create($request->all());
 
+      session()->flash('success', 'Role successfully saved.');
+
       return redirect()->route('admin.roles.index');
     }
 
