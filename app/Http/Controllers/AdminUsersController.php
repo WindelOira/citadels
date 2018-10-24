@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Role;
 use App\User;
 use App\UserMeta;
+
 use App\Http\Requests\AdminUsersRequests;
 
 class AdminUsersController extends Controller
@@ -52,7 +53,7 @@ class AdminUsersController extends Controller
      */
     public function show($id)
     {
-        //
+      $user = User::findOrFail($id);
     }
 
     /**
@@ -64,8 +65,9 @@ class AdminUsersController extends Controller
     public function edit($id)
     {
       $roles = Role::all();
+      $user = User::findOrFail($id);
 
-      return view('admin.users.edit', compact('roles'));
+      return view('admin.users.edit', compact('roles', 'user'));
     }
 
     /**

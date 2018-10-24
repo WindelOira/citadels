@@ -14363,12 +14363,6 @@ var app = new Vue({
   el: '#app'
 });
 
-// (function($) {
-//   $(function() {
-//     $('.is-datatable').DataTable();
-//   });
-// })(jQuery);
-
 /***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {

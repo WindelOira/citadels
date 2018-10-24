@@ -13,6 +13,7 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/fh-3.1.4/r-2.2.2/datatables.min.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Styles -->
@@ -210,7 +211,7 @@
   								<a class="nav-link" href="#">Blog</a>
   							</li>
   						</ul>
-  						<span class="copyright ml-auto my-auto mr-2">Copyright © 2018 DesignRevision</span>
+  						<span class="copyright ml-auto my-auto mr-2">Copyright © 2018 {{ config('app.name', 'Laravel') }}</span>
   					</footer>
 					 <!--./ Main Footer -->
 	        </main>
@@ -226,6 +227,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/fh-3.1.4/r-2.2.2/datatables.min.js"></script>
     <script src="{{ asset('assets/scripts/app.js') }}" defer></script>
     <script src="{{ asset('assets/scripts/admin.js') }}" defer></script>
     @yield('scripts')

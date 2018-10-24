@@ -29,34 +29,25 @@
             <th></th>
           </tr>
         </thead>
-        <tbody>
-        @if( count($roles) > 0 )
-          @foreach( $roles as $role )
-          <tr>
-            <td>{{ link_to_route('admin.roles.edit', $role->title, $role) }}</td>
-            <td>{{ $role->slug }}</td>
-            <td class="table__actions">
-              {!! Form::open([
-                'route'   => [
-                  'admin.roles.destroy', $role
-                ],
-                'method'  => 'DELETE'
-              ]) !!}
-                <div class="btn-group btn-group-sm d-flex justify-content-end" role="group" aria-label="Roles Actions">
-                  <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-success">
-                    <i class="material-icons">edit</i>
-                  </a>
-                  <button class="btn btn-danger">
-                    <i class="material-icons">delete</i>
-                  </button>
-                </div>
-              {!! Form::close() !!}
-            </td>
-          </tr>
-          @endforeach
-        @endif
-        </tbody>
       </table>
     </div>
   </div>
+@endsection
+
+@section('scripts')
+<script>
+  (function($) {
+    $(function() {
+      $('.is-datatable').DataTable({
+        serverSide  : true,
+        ajax        : "{{ route('admin.datatables.roles') }}",
+        columns     : [
+          { name : 'title' },
+          { name : 'slug' },
+          { name : 'action', orderable : false, searchable : false }
+        ]
+      });
+    });
+  })(jQuery);
+</script>
 @endsection

@@ -6,7 +6,7 @@
   @endpage_header
 
   {!! Form::open([
-    'route'     => 'admin.users.update',
+    'route'     => ['admin.users.update', $user],
     'method'    => 'PUT',
     'files'     => TRUE,
   ]) !!}
@@ -40,15 +40,15 @@
                 <form>
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                      {{ Form::bsText('first_name', NULL, ['placeholder' => 'First Name']) }}
+                      {{ Form::bsText('first_name', $user->getMeta('first_name'), ['placeholder' => 'First Name']) }}
                     </div>
                     <div class="form-group col-md-6">
-                      {{ Form::bsText('last_name', NULL, ['placeholder' => 'Last Name']) }}
+                      {{ Form::bsText('last_name', $user->getMeta('last_name'), ['placeholder' => 'Last Name']) }}
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                      {{ Form::bsText('email', NULL, ['placeholder' => 'Email']) }}
+                      {{ Form::bsText('email', $user->email, ['placeholder' => 'Email']) }}
                     </div>
                     <div class="form-group col-md-6">
                       {{ Form::bsPassword('password', ['placeholder' => 'Password']) }}

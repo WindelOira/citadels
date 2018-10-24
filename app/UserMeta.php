@@ -24,4 +24,11 @@ class UserMeta extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * Get user for this meta data.
+     */
+    public function user() {
+      return $this->belongsTo('App\User');
+    }
 }

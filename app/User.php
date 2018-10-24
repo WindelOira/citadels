@@ -37,4 +37,52 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * Get role for this user.
+     */
+    public function role() {
+      return $this->belongsTo('App\Role');
+    }
+
+    /**
+     * Get meta data for this user.
+     */
+    public function metas() {
+      return $this->hasMany('App\UserMeta');
+    }
+
+    /**
+     * Get user meta.
+     * 
+     * @param $key  string 
+     * @return mixed
+     */
+    public function getMeta($key) { 
+      if( count($this->metas) == 0 ) return NULL;
+
+      foreach( $this->metas as $meta ) :
+        if( $meta->key == $key ) 
+          return $meta->value;
+      endforeach;
+    }
+
+    /**
+     * Returns the action column html for datatables.
+     *
+     * @param \App\User
+     * @return string
+     */
+    public static function laratablesCustomAction($user) { 
+      return view('admin.users.actions', compact('user'))->render();
+    }
+
+    /**
+     * Returns truncated name for the datatables.
+     *
+     * @return string
+     */
+    public function laratablesName() {
+      return $this->getMeta('first_name') .' '. $this->getMeta('last_name');
+    }
 }

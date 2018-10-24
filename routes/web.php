@@ -29,4 +29,7 @@ Route::name('admin.')->middleware(['auth'])->group(function() {
 	Route::resource('/admin/medias', 'AdminMediasController');
 	Route::resource('/admin/orders', 'AdminOrdersController');
 	Route::resource('/admin/products', 'AdminProductsController');
+
+  Route::get('/admin/datatables/roles', 'DataTablesController@getDataTablesRolesData')->name('datatables.roles');
+  Route::get('/admin/datatables/users', 'DataTablesController@getDataTablesUsersData')->name('datatables.users');
 });

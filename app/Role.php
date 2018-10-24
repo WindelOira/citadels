@@ -37,4 +37,14 @@ class Role extends Model
   public function users() {
     return $this->hasMany('App\User');
   }
+
+  /**
+   * Returns the action column html for datatables.
+   *
+   * @param \App\Role
+   * @return string
+   */
+  public static function laratablesCustomAction($role) { 
+    return view('admin.roles.actions', compact('role'))->render();
+  }
 }
