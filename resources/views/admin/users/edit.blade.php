@@ -46,13 +46,8 @@
                       {{ Form::bsText('last_name', $user->getMeta('last_name'), ['placeholder' => 'Last Name']) }}
                     </div>
                   </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      {{ Form::bsText('email', $user->email, ['placeholder' => 'Email']) }}
-                    </div>
-                    <div class="form-group col-md-6">
-                      {{ Form::bsPassword('password', ['placeholder' => 'Password']) }}
-                    </div>
+                  <div class="form-group">
+                    {{ Form::bsText('email', $user->email, ['placeholder' => 'Email']) }}
                   </div>
                   <div class="form-group">
                     {{ Form::bsText('address', NULL, ['placeholder' => '1234 Main St']) }}

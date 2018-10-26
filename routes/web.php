@@ -28,8 +28,10 @@ Route::name('admin.')->middleware(['auth'])->group(function() {
 	Route::resource('/admin/users', 'AdminUsersController');
 	Route::resource('/admin/medias', 'AdminMediasController');
 	Route::resource('/admin/orders', 'AdminOrdersController');
+  Route::name('products')->resource('/admin/products/categories', 'AdminProductCategoriesController');
 	Route::resource('/admin/products', 'AdminProductsController');
 
   Route::get('/admin/datatables/roles', 'DataTablesController@getDataTablesRolesData')->name('datatables.roles');
   Route::get('/admin/datatables/users', 'DataTablesController@getDataTablesUsersData')->name('datatables.users');
+  Route::get('/admin/datatables/products/categories', 'DataTablesController@getDataTablesProductCategoriesData')->name('datatables.products.categories');
 });

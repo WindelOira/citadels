@@ -14,11 +14,8 @@
       <div class="card card-small mb-4 pt-3">
         <div class="card-header border-bottom text-center">
           <div class="mb-3 mx-auto">
-            <img class="rounded-circle" src="images/avatars/0.jpg" alt="User Avatar" width="110"> </div>
-          <h4 class="mb-0">Sierra Brooks</h4>
-          <span class="text-muted d-block mb-2">Project Manager</span>
-          <button type="button" class="mb-2 btn btn-sm btn-pill btn-outline-primary mr-2">
-            <i class="material-icons mr-1">person_add</i>Follow</button>
+            <img class="rounded-circle" src="images/avatars/0.jpg" alt="User Avatar" width="110"> 
+          </div>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item px-4">
@@ -45,13 +42,11 @@
                       {{ Form::bsText('last_name', NULL, ['placeholder' => 'Last Name']) }}
                     </div>
                   </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      {{ Form::bsText('email', NULL, ['placeholder' => 'Email']) }}
-                    </div>
-                    <div class="form-group col-md-6">
-                      {{ Form::bsPassword('password', ['placeholder' => 'Password']) }}
-                    </div>
+                  <div class="form-group">
+                    {{ Form::bsText('email', NULL, ['placeholder' => 'Email']) }}
+                  </div>
+                  <div class="form-group">
+                    {{ Form::bsPassword('password', ['placeholder' => 'Password']) }}
                   </div>
                   <div class="form-group">
                     {{ Form::bsText('address', NULL, ['placeholder' => '1234 Main St']) }}

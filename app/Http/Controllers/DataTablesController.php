@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Role;
 use App\User;
+use App\Category;
+use App\Product;
 
 use Freshbitsweb\Laratables\Laratables;
 
@@ -27,5 +29,16 @@ class DataTablesController extends Controller
    */
   public function getDataTablesUsersData() {
     return Laratables::recordsOf(User::class);
+  }
+
+  /**
+   * Return data for users.
+   *
+   * @return Json
+   */
+  public function getDataTablesProductCategoriesData() {
+    return Laratables::recordsOf(Category::class, function($query) {
+      return $query->whereType('product');
+    });
   }
 }

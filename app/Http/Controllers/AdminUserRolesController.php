@@ -81,7 +81,7 @@ class AdminUserRolesController extends Controller
       $data = $request->only(['title']);
       $data['slug'] = Str::slug($data['title']);
 
-      Role::whereId($id)->update($data);
+      Role::findOrFail($id)->update($data);
 
       session()->flash('success', 'Role successfully updated.');
 

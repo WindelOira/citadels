@@ -91,7 +91,7 @@
   								<div class="dropdown-menu dropdown-menu-small">
   									<a class="dropdown-item " href="{{ route('admin.products.index') }}">All Products</a>
   									<a class="dropdown-item " href="{{ route('admin.products.create') }}">New Product</a>
-  									<a class="dropdown-item " href="#">Product Categories</a>
+  									<a class="dropdown-item " href="{{ route('admin.products.categories.index') }}">Product Categories</a>
   								</div>
   							</li>
   							<li class="nav-item">
