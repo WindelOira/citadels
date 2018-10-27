@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Category;
+
 class AdminProductsController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class AdminProductsController extends Controller
      */
     public function index()
     {
-        return view('admin.products.index');
+      return view('admin.products.index');
     }
 
     /**
@@ -23,7 +25,14 @@ class AdminProductsController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+      $categories = Category::where([
+                      ['parent', 0],
+                      ['type', 'product']
+                    ])
+                    ->orWhereNull('parent')
+                    ->get();
+
+      return view('admin.products.create', compact('categories'));
     }
 
     /**

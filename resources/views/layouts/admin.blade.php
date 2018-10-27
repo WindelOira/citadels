@@ -13,11 +13,11 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/fh-3.1.4/r-2.2.2/datatables.min.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('assets/styles/app.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('assets/quill/dist/quill.snow.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('assets/styles/admin.css') }}" rel="stylesheet">
 	</head>
 	<body class="h-100">
@@ -30,7 +30,7 @@
   					<nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
   					<a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
   					<div class="d-table m-auto">
-  					<img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="images/shards-dashboards-logo.svg" alt="{{ config('app.name', 'Laravel') }}">
+  					<img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="" alt="{{ config('app.name', 'Laravel') }}">
   					<span class="d-none d-md-inline ml-1">{{ config('app.name', 'Laravel') }}</span>
   					</div>
   					</a>
@@ -157,7 +157,7 @@
   							</li>
   							<li class="nav-item dropdown">
   								<a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-  									<img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg" alt="User Avatar">
+  									<img class="user-avatar rounded-circle mr-2" src="" alt="User Avatar">
   									<span class="d-none d-md-inline-block">Sierra Brooks</span>
   								</a>
   								<div class="dropdown-menu dropdown-menu-small">
@@ -227,8 +227,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/fh-3.1.4/r-2.2.2/datatables.min.js"></script>
     <script src="{{ asset('assets/scripts/app.js') }}" defer></script>
+    <!-- <script src="{{ asset('assets/quill/dist/quill.min.js') }}" defer></script> -->
     <script src="{{ asset('assets/scripts/admin.js') }}" defer></script>
     @yield('scripts')
 	</body>

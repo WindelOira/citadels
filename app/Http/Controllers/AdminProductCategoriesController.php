@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\CategoriesRequests;
+use App\Media;
+use App\MediaMeta;
 use App\Category;
 
 class AdminProductCategoriesController extends Controller
@@ -17,6 +19,7 @@ class AdminProductCategoriesController extends Controller
     public function index()
     {
       $parent = Category::whereNull('parent')
+                ->orWhere('parent', 0)
                 ->where('type', 'product')
                 ->get()
                 ->pluck('title', 'id')
@@ -43,10 +46,20 @@ class AdminProductCategoriesController extends Controller
      */
     public function store(CategoriesRequests $request)
     {
-      $data = $request->all();
-      $data['type'] = 'product';
+      $category = Category::create($request
+                          ->merge(['type' => 'product'])
+                          ->all());
 
-      Category::create($data);
+      if( $request->hasFile('thumbnail') ) :
+        $media = new Media([
+          'title'       => chop($request->thumbnail->getClientOriginalName(), '.'. $request->thumbnail->getClientOriginalExtension()),
+          'ext'         => $request->thumbnail->getClientOriginalExtension()
+        ]);
+
+        $category->medias()->save($media);
+
+        $request->file('thumbnail')->storeAs($media->generateUploadLocation(), $category->medias->first()->media_file);
+      endif;
 
       session()->flash('success', 'Product category has been added successfully.');
 
@@ -61,7 +74,7 @@ class AdminProductCategoriesController extends Controller
      */
     public function show($id)
     {
-        //
+      return Category::findOrFail($id)->media;
     }
 
     /**

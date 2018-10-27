@@ -9,8 +9,13 @@
     <div class="col-lg-4">
       {!! Form::open([
         'route'     => isset($category) ? ['admin.products.categories.update', $category] : 'admin.products.categories.store',
-        'method'    => isset($category) ? 'PUT' : 'POST'
+        'method'    => isset($category) ? 'PUT' : 'POST',
+        'files'     => TRUE,
       ]) !!}
+        <div class="form-group thumbnail-preview thumbnail-preview__category">
+          <img src="https://via.placeholder.com/150/949494/FFFFFF?text=Thumbnail" alt="" class="mx-auto mb-2 rounded d-block thumbnail-preview__image">
+          {{ Form::bsFile('thumbnail', ['class' => 'd-none thumbnail-preview__input']) }}
+        </div>
         <div class="form-group">
           {{ Form::bsText('title', isset($category) ? $category->title : '') }}
         </div>
@@ -24,11 +29,11 @@
       {!! Form::close() !!}
     </div>
     <div class="col-lg-8">
-      <table class="table table-sm table-striped is-datatable">
+      <table class="table table-sm table-striped is-datatable" data-ajax="{{ route('admin.datatables.products.categories') }}" data-columns='[{"name" : "title"}, {"name" : "parent"}, {"name" : "slug"}, {"name" : "productcategoriesaction", "orderable" : "false", "searchable" : "false"}]'>
         <thead>
           <tr>
+            <th>Category</th>
             <th>Parent</th>
-            <th>Title</th>
             <th>Slug</th>
             <th></th>
           </tr>
@@ -36,23 +41,4 @@
       </table>
     </div>
   </div>
-@endsection
-
-@section('scripts')
-<script>
-  (function($) {
-    $(function() {
-      $('.is-datatable').DataTable({
-        serverSide  : true,
-        ajax        : "{{ route('admin.datatables.products.categories') }}",
-        columns     : [
-          { name : 'parent' },
-          { name : 'title' },
-          { name : 'slug' },
-          { name : 'productcategoriesaction', orderable : false, searchable : false }
-        ]
-      });
-    });
-  })(jQuery);
-</script>
 @endsection

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 
@@ -32,6 +33,13 @@ class Category extends Model
   }
 
   /**
+   * Get media for this category.
+   */
+  public function medias() {
+    return $this->morphToMany('App\Media', 'mediaable');
+  }
+
+  /**
    * Get all the products that are assigned to this category.
    */
   public function products() {
@@ -39,14 +47,50 @@ class Category extends Model
   }
 
   /**
+   * Check if category is a parent.
+   *
+   * @param int   $id     Parent/Category ID.
+   *
+   * @return bool
+   */
+  public function isParent($id = FALSE) {
+    $id = $id === FALSE ? $this->id : $id;
+
+    return $this->findOrFail($id)->whereParent(0)->orWhereNull('parent') ? TRUE : FALSE;
+  }
+
+  /**
    * Get parent category.
    *
-   * @param int   $id     Parent ID.
+   * @param int   $id     Parent/Category ID.
    *
-   * @return collection
+   * @return object
    */
-  public static function getParent($id) { 
-    return self::whereId($id)->first();
+  public function getParent($id = FALSE) { 
+    $id = $id === FALSE ? $this->id : $id;
+
+    return $this->whereId($id)->first();
+  }
+
+  /**
+   * Get children.
+   *
+   * @param int   $id     Parent/Category ID.
+   */
+  public function getChildren($id = FALSE) {
+    $id = $id === FALSE ? $this->id : $id;
+
+    return $this->whereParent($id)->get();
+  }
+
+  /**
+   * Get category thumbnail.
+   *
+   * @return object
+   */
+  public function getThumbnailAttribute() {
+
+    return $this->medias->first()->generateUploadLocation() .'/'. $this->medias->first()->media_file;
   }
 
   /**
@@ -62,6 +106,16 @@ class Category extends Model
   }
 
   /**
+   * Returns truncated thumbnail for the datatables.
+   *
+   * @return string
+   */
+  public function laratablesTitle()
+  {
+    return "<img src=". Storage::url($this->thumbnail)." class=\"rounded img-thumbnail table-thumbnail\"/> {$this->title}";
+  }
+
+  /**
    * Returns the action column html for datatables.
    *
    * @param \App\Category
@@ -69,6 +123,6 @@ class Category extends Model
    */
   public static function laratablesCustomProductCategoriesAction($category)
   {
-      return view('admin.products.categories.action', compact('category'))->render();
+    return view('admin.products.categories.action', compact('category'))->render();
   }
 }
