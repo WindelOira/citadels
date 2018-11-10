@@ -21,7 +21,7 @@
       {!! Form::close() !!}
     </div>
     <div class="col-lg-8">
-      <table class="table table-sm table-striped is-datatable">
+      <table class="table table-sm table-striped is-datatable" data-ajax="{{ route('admin.datatables.roles') }}" data-columns='[{"name" : "title"}, {"name" : "slug"}, {"name" : "roles_action", "orderable" : "false", "searchable" : "false"}]'>
         <thead>
           <tr>
             <th>Title</th>
@@ -32,22 +32,4 @@
       </table>
     </div>
   </div>
-@endsection
-
-@section('scripts')
-<script>
-  (function($) {
-    $(function() {
-      $('.is-datatable').DataTable({
-        serverSide  : true,
-        ajax        : "{{ route('admin.datatables.roles') }}",
-        columns     : [
-          { name : 'title' },
-          { name : 'slug' },
-          { name : 'action', orderable : false, searchable : false }
-        ]
-      });
-    });
-  })(jQuery);
-</script>
 @endsection

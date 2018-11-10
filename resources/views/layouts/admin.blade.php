@@ -17,7 +17,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('assets/styles/app.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('assets/quill/dist/quill.snow.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('assets/styles/admin.css') }}" rel="stylesheet">
 	</head>
 	<body class="h-100">
@@ -69,8 +68,8 @@
   									<span>Media</span>
   								</a>
   								<div class="dropdown-menu dropdown-menu-small">
-  									<a class="dropdown-item " href="#">All Media</a>
-  									<a class="dropdown-item " href="#">Upload Media</a>
+  									<a class="dropdown-item" href="{{ route('admin.medias.index') }}">All Media</a>
+  									<a class="dropdown-item" href="{{ route('admin.medias.create') }}">Upload Media</a>
   								</div>
   							</li>
   							<li class="nav-item">
@@ -222,13 +221,12 @@
 
     <!-- Scripts -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
     <script src="{{ asset('assets/scripts/app.js') }}" defer></script>
-    <!-- <script src="{{ asset('assets/quill/dist/quill.min.js') }}" defer></script> -->
     <script src="{{ asset('assets/scripts/admin.js') }}" defer></script>
     @yield('scripts')
 	</body>

@@ -14,7 +14,7 @@
       <div class="card card-small mb-4 pt-3">
         <div class="card-header border-bottom text-center">
           <div class="mb-3 mx-auto">
-            <img class="rounded-circle" src="images/avatars/0.jpg" alt="User Avatar" width="110"> 
+            <img class="rounded-circle" src="https://via.placeholder.com/110/949494/FFFFFF?text=Thumbnail" alt="User Avatar" width="110"> 
           </div>
         </div>
         <ul class="list-group list-group-flush">

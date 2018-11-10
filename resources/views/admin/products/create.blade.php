@@ -5,31 +5,30 @@
     Products
   @endpage_header
 
+  {!! Form::open([
+    'route'    => 'admin.products.store'
+  ]) !!}
 	<div class="row">
 		<div class="col-lg-9 col-md-12">
       <!-- Add New Post Form -->
       <div class="card card-small mb-3">
         <div class="card-body">
-          {!! Form::open([
-            'route'    => 'admin.products.store'
-          ]) !!}
             <div class="form-group">
               {{ Form::bsText('title', NULL, ['placeholder' => 'Product Title']) }}
             </div>
             
-            <div id="editor-container" class="add-new-post__editor mb-1"></div>
-          {!! Form::close() !!}
+            {{ Form::bsEditor('content') }}
         </div>
       </div>
       <!-- / Add New Post Form -->
     </div>
     <div class="col-lg-3 col-md-12">
-      <!-- Post Overview -->
+      <!-- Actions -->
       <div class='card card-small mb-3'>
         <div class="card-header border-bottom">
           <h6 class="m-0">Actions</h6>
         </div>
-        <div class='card-body p-0'>
+        <div class="card-body p-0">
           <ul class="list-group list-group-flush">
             <li class="list-group-item p-3">
               <span class="d-flex mb-2">
@@ -55,21 +54,19 @@
               </span>
             </li>
             <li class="list-group-item d-flex px-3">
-              <button class="btn btn-sm btn-outline-accent">
-                <i class="material-icons">save</i> Save Draft</button>
-              <button class="btn btn-sm btn-accent ml-auto">
-                <i class="material-icons">file_copy</i> Publish</button>
+              {{ Form::bsButton('save', 'draft', 'submit', ['title' => '<i class="material-icons">save</i> Save Draft','class' => 'btn btn-sm btn-outline-accent']) }}
+              {{ Form::bsButton('save', 'publish', 'submit', ['title' => '<i class="material-icons">file_copy</i> Publish','class' => 'btn btn-sm btn-accent ml-auto']) }}
             </li>
           </ul>
         </div>
       </div>
-      <!-- / Post Overview -->
-      <!-- Post Overview -->
-      <div class='card card-small mb-3'>
+      <!-- / Actions -->
+      <!-- Categories -->
+      <div class="card card-small mb-3">
         <div class="card-header border-bottom">
           <h6 class="m-0">Categories</h6>
         </div>
-        <div class='card-body p-0'>
+        <div class="card-body p-0">
           <ul class="list-group list-group-flush">
           @if( count($categories) > 0 )
             <li class="list-group-item px-3 pb-2">
@@ -78,7 +75,7 @@
                 <input type="checkbox" class="custom-control-input" id="{{ str_slug($category->title) }}">
                 <label class="custom-control-label" for="{{ str_slug($category->title) }}">{{ $category->title }}</label>
               </div>
-              @if( $category->isParent() )
+              @if( $category->isParent() && $category->hasChildren() )
               <ul class="list-group list-group-flush">
                 <li class="list-group-item px-3 pb-2">
                   @foreach( $category->getChildren() as $child )
@@ -106,13 +103,18 @@
           </ul>
         </div>
       </div>
-      <!-- / Post Overview -->
+      <!-- / Categories -->
+      <!-- Featured Image -->
+      <div class="card card-small mb-3">
+        <div class="card-header border-bottom">
+          <h6 class="m-0">Featured Image</h6>
+        </div>
+        <div class="card-body">
+          <a href="javascript:;">Choose Featured Image</a>
+        </div>
+      </div>
+      <!-- / Featured Image -->
     </div>
 	</div>
-@endsection
-
-@section('scripts')
-<script>
-  var quill = new Quill('#editor-container');
-</script>
+  {!! Form::close() !!}
 @endsection

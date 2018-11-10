@@ -29,7 +29,7 @@
       {!! Form::close() !!}
     </div>
     <div class="col-lg-8">
-      <table class="table table-sm table-striped is-datatable" data-ajax="{{ route('admin.datatables.products.categories') }}" data-columns='[{"name" : "title"}, {"name" : "parent"}, {"name" : "slug"}, {"name" : "productcategoriesaction", "orderable" : "false", "searchable" : "false"}]'>
+      <table class="table table-sm table-striped is-datatable" data-ajax="{{ route('admin.datatables.products.categories') }}" data-columns='[{"name" : "title"}, {"name" : "parent"}, {"name" : "slug"}, {"name" : "product_categories_action", "orderable" : "false", "searchable" : "false"}]'>
         <thead>
           <tr>
             <th>Category</th>

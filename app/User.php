@@ -68,21 +68,21 @@ class User extends Authenticatable
     }
 
     /**
-     * Returns the action column html for datatables.
-     *
-     * @param \App\User
-     * @return string
-     */
-    public static function laratablesCustomAction($user) { 
-      return view('admin.users.actions', compact('user'))->render();
-    }
-
-    /**
      * Returns truncated name for the datatables.
      *
      * @return string
      */
     public function laratablesName() {
       return $this->getMeta('first_name') .' '. $this->getMeta('last_name');
+    }
+
+    /**
+     * Returns the action column html for datatables.
+     *
+     * @param \App\User
+     * @return string
+     */
+    public static function laratablesCustomUsersAction($user) { 
+      return view('admin.users.actions', compact('user'))->render();
     }
 }

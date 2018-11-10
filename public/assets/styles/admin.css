@@ -1,3 +1,17 @@
+/* Tables
+----------------------------------------------------------------*/
+
+  .main-content .dataTables_wrapper table.dataTable thead th, 
+  .main-content .dataTables_wrapper table.dataTable tbody td {  
+    text-align: left; }
+    .main-content .dataTables_wrapper table.dataTable tbody td .table-thumbnail {  
+      max-width: 50px;
+      max-height: 50px; }
+
+
+/* Thumbnail Preview 
+----------------------------------------------------------------*/
+
 .thumbnail-preview__category {  
   width: 75px;
   height: 75px;

@@ -4773,6 +4773,8 @@ a.text-accent:hover, a.text-accent:focus {
     .dropzone .dz-preview .dz-size {
       font-size: 80%;
       color: #818EA3; }
+    .dropzone .dz-preview:not(.dz-error) .dz-error-message {
+      display: none; }
     .dropzone .dz-preview .dz-error-message span {
       background-color: #c4183c;
       color: #fff;

@@ -15,6 +15,15 @@ use Freshbitsweb\Laratables\Laratables;
 class DataTablesController extends Controller
 {
   /**
+   * Return data for medias.
+   *
+   * @return Json
+   */
+  public function getDataTablesMediasData() {
+    return Laratables::recordsOf(Media::class);
+  }
+
+  /**
    * Return data for roles.
    *
    * @return Json

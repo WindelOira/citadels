@@ -23,8 +23,7 @@ class Category extends Model
    *
    * @return array
    */
-  public function sluggable()
-  {
+  public function sluggable() {
     return [
       'slug' => [
         'source' => 'title'
@@ -73,6 +72,15 @@ class Category extends Model
   }
 
   /**
+   * Check if category has children.
+   */
+  public function hasChildren($id = FALSE) {
+    $id = $id === FALSE ? $this->id : $id;
+
+    return count($this->getChildren()) > 0 ? TRUE : FALSE;
+  }
+
+  /**
    * Get children.
    *
    * @param int   $id     Parent/Category ID.
@@ -89,8 +97,7 @@ class Category extends Model
    * @return object
    */
   public function getThumbnailAttribute() {
-
-    return $this->medias->first()->generateUploadLocation() .'/'. $this->medias->first()->media_file;
+    return $this->medias->first() ? Storage::url($this->medias->first()->thumbnail) : "https://via.placeholder.com/50/949494/FFFFFF?text=Thumbnail";
   }
 
   /**
@@ -98,8 +105,7 @@ class Category extends Model
    *
    * @return string
    */
-  public function laratablesParent()
-  {
+  public function laratablesParent() {
     $parent = $this->getParent($this->parent);
 
     return $parent ? $parent->title : 'N/A';
@@ -110,9 +116,8 @@ class Category extends Model
    *
    * @return string
    */
-  public function laratablesTitle()
-  {
-    return "<img src=". Storage::url($this->thumbnail)." class=\"rounded img-thumbnail table-thumbnail\"/> {$this->title}";
+  public function laratablesTitle() {
+    return "<img src=\"{$this->thumbnail}\" class=\"mr-2 rounded img-thumbnail table-thumbnail\"/> {$this->title}";
   }
 
   /**
@@ -121,8 +126,7 @@ class Category extends Model
    * @param \App\Category
    * @return string
    */
-  public static function laratablesCustomProductCategoriesAction($category)
-  {
+  public static function laratablesCustomProductCategoriesAction($category) {
     return view('admin.products.categories.action', compact('category'))->render();
   }
 }

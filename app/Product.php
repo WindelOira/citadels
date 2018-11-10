@@ -17,7 +17,14 @@ class Product extends Model
    *
    * @return array
    */
-  protected $fillable = ['title', 'slug'];
+  protected $fillable = ['title', 'slug', 'content', 'status'];
+
+  /**
+   * The attributes that should be mutated to dates.
+   *
+   * @var array
+   */
+  protected $dates = ['deleted_at'];
 
   /**
    * Return the sluggable configuration array for this model.

@@ -12,7 +12,6 @@ const mix = require('laravel-mix');
  */
 
 mix
-.copyDirectory('node_modules/quill', 'public/assets/quill')
 .js('resources/assets/scripts/app.js', 'public/assets/scripts')
 .scripts([
 	'resources/assets/scripts/shards-dashboards.1.2.0.min.js',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Category;
+use App\Product;
 
 class AdminProductsController extends Controller
 {
@@ -43,7 +44,15 @@ class AdminProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = $request->all();
+      $data['content'] = base64_encode($data['content']);
+      $data['status'] = $data['save'];
+
+      Product::create($data);
+
+      session()->flash('success', $data['save'] == 'publish' ? 'Product saved successfully.' : 'Product saved as draft.');
+
+      return redirect()->route('admin.products.create');
     }
 
     /**

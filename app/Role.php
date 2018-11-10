@@ -44,7 +44,7 @@ class Role extends Model
    * @param \App\Role
    * @return string
    */
-  public static function laratablesCustomAction($role) { 
+  public static function laratablesCustomRolesAction($role) { 
     return view('admin.roles.actions', compact('role'))->render();
   }
 }

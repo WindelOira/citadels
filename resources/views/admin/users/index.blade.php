@@ -5,33 +5,14 @@
     Users
   @endpage_header
 
-  <table class="table table-sm is-datatable">
+  <table class="table table-sm is-datatable" data-ajax="{{ route('admin.datatables.users') }}" data-columns='[{"name" : "name"}, {"name" : "email"}, {"name" : "role.title"}, {"name" : "users_action", "orderable" : "false", "searchable" : "false"}]'>
     <thead>
       <tr>
-        <th></th>
+        <th>Name</th>
         <th>Email Address</th>
         <th>Role</th>
         <th></th>
       </tr>
     </thead>
   </table>
-@endsection
-
-@section('scripts')
-<script>
-  (function($) {
-    $(function() {
-      $('.is-datatable').DataTable({
-        serverSide  : true,
-        ajax        : "{{ route('admin.datatables.users') }}",
-        columns     : [
-          { name : 'name' },
-          { name : 'email' },
-          { name : 'role.title' },
-          { name : 'action', orderable : false, searchable : false }
-        ]
-      });
-    });
-  })(jQuery);
-</script>
 @endsection

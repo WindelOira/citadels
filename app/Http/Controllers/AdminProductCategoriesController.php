@@ -50,13 +50,20 @@ class AdminProductCategoriesController extends Controller
                           ->merge(['type' => 'product'])
                           ->all());
 
-      if( $request->hasFile('thumbnail') ) :
+      if( $request->hasFile('thumbnail') ) : 
+        $thumbnail = $request->thumbnail;
+
         $media = new Media([
-          'title'       => chop($request->thumbnail->getClientOriginalName(), '.'. $request->thumbnail->getClientOriginalExtension()),
-          'ext'         => $request->thumbnail->getClientOriginalExtension()
+          'title'       => chop($thumbnail->getClientOriginalName(), '.'. $thumbnail->getClientOriginalExtension()),
+          'ext'         => $thumbnail->getClientOriginalExtension()
         ]);
 
         $category->medias()->save($media);
+
+        $media->addMeta([
+          'mime_type'   => $thumbnail->getMimeType(),
+          'size'        => $thumbnail->getClientSize()
+        ]);
 
         $request->file('thumbnail')->storeAs($media->generateUploadLocation(), $category->medias->first()->media_file);
       endif;

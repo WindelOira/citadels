@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         Form::component('bsEmail', 'components.forms.email', ['name', 'value' => NULL, 'attr' => []]);
         Form::component('bsPassword', 'components.forms.password', ['name', 'attr' => []]);
         Form::component('bsTextarea', 'components.forms.textarea', ['name', 'value' => NULL, 'attr' => []]);
+        Form::component('bsEditor', 'components.forms.editor', ['name', 'value' => NULL]);
         Form::component('bsSelect', 'components.forms.select', ['name', 'options' => [], 'default' => NULL, 'attr' => []]);
         Form::component('bsFile', 'components.forms.file', ['name', 'attr' => []]);
         Form::component('bsButton', 'components.forms.button', ['name', 'value' => NULL, 'type' => 'button', 'attr' => []]);

@@ -31,6 +31,7 @@ Route::name('admin.')->middleware(['auth'])->group(function() {
   Route::name('products')->resource('/admin/products/categories', 'AdminProductCategoriesController');
 	Route::resource('/admin/products', 'AdminProductsController');
 
+  Route::get('/admin/datatables/medias', 'DataTablesController@getDataTablesMediasData')->name('datatables.medias');
   Route::get('/admin/datatables/roles', 'DataTablesController@getDataTablesRolesData')->name('datatables.roles');
   Route::get('/admin/datatables/users', 'DataTablesController@getDataTablesUsersData')->name('datatables.users');
   Route::get('/admin/datatables/products/categories', 'DataTablesController@getDataTablesProductCategoriesData')->name('datatables.products.categories');
