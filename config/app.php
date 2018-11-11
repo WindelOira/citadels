@@ -165,6 +165,10 @@ return [
          */
         Collective\Html\HtmlServiceProvider::class,
 
+        /*
+         * Tinify Service Providers...
+         */
+        yasmuru\LaravelTinify\LaravelTinifyServiceProvider::class,
     ],
 
     /*
@@ -216,6 +220,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'HumanReadableFile' => App\Helpers\HumanReadableFile::class,
+        'Tinify' => yasmuru\LaravelTinify\Facades\Tinify::class,
 
     ],
 

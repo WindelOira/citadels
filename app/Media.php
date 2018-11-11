@@ -113,6 +113,33 @@ class Media extends Model
   }
 
   /**
+   * Update meta data.
+   *
+   * @param mixed   $key
+   * @param mixed   $value
+   *
+   * @return bool
+   */
+  public function updateMeta($key, $value = FALSE) {
+    if( is_array($key) ) :
+      $metas = [];
+
+      foreach( $key as $k => $v ) :
+        $metas[] = [
+          'key'     => $k,
+          'value'   => $v
+        ];
+      endforeach;
+
+      return $this->metas()->updateOrCreate(array_values($metas));
+    else :
+      return $this->metas()->where('key', $key)->update([
+        'value'  => $value
+      ]);
+    endif;
+  }
+
+  /**
    * Get media file.
    *
    * @return string
@@ -120,7 +147,7 @@ class Media extends Model
   public function getMediaFileAttribute() {
     $media_file = $this->whereId($this->id)->first();
 
-    return "{$media_file->title}.{$media_file->ext}";
+    return "{$media_file->slug}.{$media_file->ext}";
   }
 
   /**

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Media;
 
+use Tinify;
+
 class AdminMediasController extends Controller
 {
     /**
@@ -51,6 +53,14 @@ class AdminMediasController extends Controller
         ]);
 
         $request->file('file')->storeAs($media->generateUploadLocation(), $media->media_file);
+
+        // Tinify/compress uploaded file
+        if( $media->ext == 'png' || $media->ext == 'jpg' || $media->ext == 'jpeg' ) :
+          $tinified = Tinify::fromFile(env('APP_URL') . Storage::url($media->thumbnail));
+          $tinified->toFile(ltrim(Storage::url($media->thumbnail), '/'));
+
+          $media->updateMeta('size', $tinified->result()->size());
+        endif;
 
         return response()->json('success', 200);
       endif;
@@ -107,6 +117,5 @@ class AdminMediasController extends Controller
       session()->flash('deleted', 'Media item has been deleted.');
 
       return response()->json('success', 200);
-      //return redirect()->route('admin.medias.index');
     }
 }
