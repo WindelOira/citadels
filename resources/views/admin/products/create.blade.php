@@ -72,7 +72,7 @@
             <li class="list-group-item px-3 pb-2">
               @foreach( $categories as $category )
               <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="{{ str_slug($category->title) }}">
+                {{ Form::checkbox('categories[]', $category->id, false, ['id' => str_slug($category->title), 'class' => 'custom-control-input']) }}
                 <label class="custom-control-label" for="{{ str_slug($category->title) }}">{{ $category->title }}</label>
               </div>
               @if( $category->isParent() && $category->hasChildren() )
@@ -80,7 +80,8 @@
                 <li class="list-group-item px-3 pb-2">
                   @foreach( $category->getChildren() as $child )
                   <div class="custom-control custom-checkbox mb-1">
-                    <input type="checkbox" class="custom-control-input" id="{{ str_slug($child->title) }}">
+                    {{ Form::checkbox('categories[]', $child->id, false, ['id' => str_slug($child->title), 'class' => 'custom-control-input']) }}
+                    
                     <label class="custom-control-label" for="{{ str_slug($child->title) }}">{{ $child->title }}</label>
                   </div>
                   @endforeach
@@ -107,14 +108,25 @@
       <!-- Featured Image -->
       <div class="card card-small mb-3">
         <div class="card-header border-bottom">
-          <h6 class="m-0">Featured Image</h6>
+          <div class="uploader-result">
+            <div class="uploader-preview">
+              <div class="rounded uploader-preview__image"></div>
+            </div>
+            {{ Form::hidden('_media', '', ['class' => 'uploader-input']) }}
+          </div>
         </div>
         <div class="card-body">
-          <a href="javascript:;">Choose Featured Image</a>
+          <a href="javascript:;" data-toggle="modal" data-target="#uploader-modal">Choose Featured Image</a>
         </div>
       </div>
       <!-- / Featured Image -->
     </div>
 	</div>
   {!! Form::close() !!}
+
+  @uploader([
+    'title'   => 'Upload Featured Image',
+    'single'  => TRUE
+  ])
+  @enduploader
 @endsection

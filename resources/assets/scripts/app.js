@@ -40,7 +40,6 @@ window.$.ajaxSetup({
   }
 });
 
-
 /*
  |--------------------------------------------------------------------------
  | DataTable
@@ -88,6 +87,14 @@ if( window.$('.is-datatable').length > 0 ) {
 
 /*
  |--------------------------------------------------------------------------
+ | Image To Blob
+ |--------------------------------------------------------------------------
+ */
+window.ImageToBlob = require('image-to-blob');
+
+
+/*
+ |--------------------------------------------------------------------------
  | Dropzone
  |--------------------------------------------------------------------------
  */
@@ -97,14 +104,15 @@ window.Dropzone.autoDiscover = false;
 
 if( window.$('.dropzone').length > 0 ) {
   var dropzone = new Dropzone('.dropzone', {
-    parallelUploads  : 1,
-    init            : function() {
+    parallelUploads   : 4, 
+    init              : function() {
       this.on('success', function(f) {
-        if( typeof datatable !== 'undefined' )
+        if( typeof datatable !== 'undefined' && window.$('.is-datatable').length > 0 ) {
           var dtPage = datatable.page();
 
           // Reload and set page position
           datatable.ajax.reload().page(dtPage).draw('page');
+        }
       });
       this.on('complete', function(f) {
         dropzone.removeFile(f);

@@ -2,5 +2,6 @@
     "/assets/scripts/app.js": "/assets/scripts/app.js",
     "/assets/styles/app.css": "/assets/styles/app.css",
     "/assets/styles/admin.css": "/assets/styles/admin.css",
+    "/assets/scripts/uploader.js": "/assets/scripts/uploader.js",
     "/assets/scripts/admin.js": "/assets/scripts/admin.js"
 }

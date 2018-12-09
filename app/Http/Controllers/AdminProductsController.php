@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Category;
 use App\Product;
+use App\Media;
 
 class AdminProductsController extends Controller
 {
@@ -48,11 +49,25 @@ class AdminProductsController extends Controller
       $data['content'] = base64_encode($data['content']);
       $data['status'] = $data['save'];
 
-      Product::create($data);
+      $product = Product::create($data);
+
+      if( isset($data['categories']) && is_array($data['categories']) ) :
+        foreach( $data['categories'] as $key => $value ) :
+          $category = Category::findOrFail($value);
+
+          $category->products()->save($product);
+        endforeach;
+      endif;
+
+      if( ! empty($request->_media) ) : 
+        $media = Media::findOrFail($request->_media);
+
+        $product->medias()->save($media);
+      endif;
 
       session()->flash('success', $data['save'] == 'publish' ? 'Product saved successfully.' : 'Product saved as draft.');
 
-      return redirect()->route('admin.products.create');
+      return redirect()->route('admin.products.edit', $product);
     }
 
     /**
@@ -74,8 +89,15 @@ class AdminProductsController extends Controller
      */
     public function edit($id)
     {
-      //$product = 
-      //return view('admin.products.edit');
+      $product = Product::findOrFail($id);
+      $categories = Category::where([
+                      ['parent', 0],
+                      ['type', 'product']
+                    ])
+                    ->orWhereNull('parent')
+                    ->get();
+
+      return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -87,7 +109,9 @@ class AdminProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $product = Product::findOrFail($id);
+
+      return view('admin.products.edit', $product);
     }
 
     /**
@@ -98,6 +122,10 @@ class AdminProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Product::findOrFail($id)->delete();
+
+      session()->flash('danger', 'Product deleted successfully.');
+
+      return response()->json('success', 200);
     }
 }

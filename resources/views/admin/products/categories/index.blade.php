@@ -13,8 +13,13 @@
         'files'     => TRUE,
       ]) !!}
         <div class="form-group thumbnail-preview thumbnail-preview__category">
-          <img src="https://via.placeholder.com/150/949494/FFFFFF?text=Thumbnail" alt="" class="mx-auto mb-2 rounded d-block thumbnail-preview__image">
-          {{ Form::bsFile('thumbnail', ['class' => 'd-none thumbnail-preview__input']) }}
+          <div class="uploader-result">
+            <div class="uploader-preview">
+              <div class="rounded uploader-preview__image"></div>
+            </div>
+            {{ Form::hidden('_media', '', ['class' => 'uploader-input']) }}
+          </div>
+          <a href="javascript:;" data-toggle="modal" data-target="#uploader-modal">Choose Featured Image</a>
         </div>
         <div class="form-group">
           {{ Form::bsText('title', isset($category) ? $category->title : '') }}
@@ -29,16 +34,22 @@
       {!! Form::close() !!}
     </div>
     <div class="col-lg-8">
-      <table class="table table-sm table-striped is-datatable" data-ajax="{{ route('admin.datatables.products.categories') }}" data-columns='[{"name" : "title"}, {"name" : "parent"}, {"name" : "slug"}, {"name" : "product_categories_action", "orderable" : "false", "searchable" : "false"}]'>
+      <table class="table table-sm table-striped is-datatable" data-ajax="{{ route('admin.datatables.products.categories') }}" data-columns='[{"name" : "id"}, {"name" : "product_title", "orderable" : false, "searchable" : false}, {"name" : "parent"}, {"name" : "slug"}]' data-single='true'>
         <thead>
           <tr>
+            <th></th>
             <th>Category</th>
             <th>Parent</th>
             <th>Slug</th>
-            <th></th>
           </tr>
         </thead>
       </table>
     </div>
   </div>
+
+  @uploader([
+    'title'   => 'Upload Featured Image',
+    'single'  => TRUE
+  ])
+  @enduploader
 @endsection

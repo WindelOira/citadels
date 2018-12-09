@@ -14,7 +14,10 @@
       <div class="card card-small mb-4 pt-3">
         <div class="card-header border-bottom text-center">
           <div class="mb-3 mx-auto">
-            <img class="rounded-circle" src="https://via.placeholder.com/110/949494/FFFFFF?text=Thumbnail" alt="User Avatar" width="110"> 
+            <a href="javascript:;" data-toggle="modal" data-target="#uploader-modal">
+              <img class="rounded-circle" src="https://via.placeholder.com/120/949494/FFFFFF?text=Thumbnail" alt="User Avatar" width="120"> 
+            </a>
+            {!! Form::hidden('image') !!}
           </div>
         </div>
         <ul class="list-group list-group-flush">
@@ -77,4 +80,7 @@
     </div>
   </div>
   {!! Form::close() !!}
+
+  @uploader(['title' => 'Upload Avatar'])
+  @enduploader
 @endsection

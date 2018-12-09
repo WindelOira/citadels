@@ -60,6 +60,14 @@ class Media extends Model
   }
 
   /**
+   * Get all of the owning mediaable media.
+   */
+  public function mediaable()
+  {
+    return $this->morphTo();
+  }
+
+  /**
    * Get meta data for this media.
    */
   public function metas() {
@@ -71,6 +79,13 @@ class Media extends Model
    */
   public function categories() {
     return $this->morphedByMany('App\Category', 'mediaable');
+  }
+
+  /**
+   * Get all products for this media.
+   */
+  public function products() {
+    return $this->morphedByMany('App\Product', 'mediaable');
   }
 
   /**
@@ -183,9 +198,9 @@ class Media extends Model
    */
   public function laratablesId()
   {
-    return "<div class=\"custom-control custom-checkbox w-auto\">
-              <input type=\"checkbox\" class=\"custom-control-input\" id=\"". str_slug($this->title) ."__checkbox\" value=\"". $this->id ."\">
-              <label class=\"custom-control-label\" for=\"". str_slug($this->title) ."__checkbox\"></label>
+    return "<div class=\"custom-control custom-checkbox w-100 h-100\">
+              <input type=\"checkbox\" class=\"custom-control-input\" id=\"media-". str_slug($this->id) ."__checkbox\" value=\"". $this->id ."\">
+              <label class=\"custom-control-label w-100 h-100\" for=\"media-". str_slug($this->id) ."__checkbox\"></label>
             </div>";
   }
 
@@ -211,6 +226,39 @@ class Media extends Model
     $title .= Form::close();
     
     return $title;
+  }
+
+  /**
+   * Returns truncated title for the datatables.
+   *
+   * @return string
+   */
+  public static function laratablesCustomItem($media) {
+    $item = "<div class=\"file-manager__item card card-small h-100\">";
+      $item .= Form::open([
+        'route'   => [
+          'admin.medias.destroy', $media
+        ],
+        'method'  => 'DELETE'
+      ]);
+        $item .= "<ul class=\"list-unstyled p-1 m-0 d-flex\">";
+          $item .= "<li><a href=\"". route('admin.medias.edit', $media) ."\" class=\"btn btn-link px-0 py-0 pr-1\"><span class=\"fa fa-pencil\"></span></a></li>";
+          $item .= "<li><button type=\"submit\" class=\"btn btn-link text-danger px-0 py-0 pl-1\" value=\"". $media->id ."\"><span class=\"fa fa-trash\"></span></button></li>";
+        $item .= "</ul>";
+      $item .= Form::close();
+      $item .= "<div class=\"file-manager__item-preview card-body px-0 pb-0 pt-4\">";
+        $item .= "<img src=\"". Storage::url($media->thumbnail) ."\" class=\"img-thumbnail table-thumbnail\" alt=\"". $media->whereId($media->id)->first()->title ."\"/>";
+      $item .= "</div>";
+      $item .= "<div class=\"card-footer border-top\">";
+        $item .= "<span class=\"file-manager__item-icon\">";
+          $item .= "<i class=\"material-icons\">&#xE24D;</i>";
+        $item .= "</span>";
+        $item .= "<h6 class=\"file-manager__item-title\">". $media->whereId($media->id)->first()->title ."</h6>";
+        $item .= "<span class=\"file-manager__item-size ml-auto\">". HumanReadableFile::bytesToHuman($media->getMeta('size')) ."</span>";
+      $item .= "</div>";
+    $item .= "</div>";
+
+    return $item;
   }
 
   /**

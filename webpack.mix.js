@@ -13,9 +13,12 @@ const mix = require('laravel-mix');
 
 mix
 .js('resources/assets/scripts/app.js', 'public/assets/scripts')
+.js('resources/assets/scripts/uploader.js', 'public/assets/scripts')
 .scripts([
 	'resources/assets/scripts/shards-dashboards.1.2.0.min.js',
   'resources/assets/scripts/admin.js',
+  'resources/assets/scripts/tables.js',
+  // 'resources/assets/scripts/uploader.js',
 ], 'public/assets/scripts/admin.js')
 .styles([
   'resources/assets/styles/admin.css'

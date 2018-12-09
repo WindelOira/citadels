@@ -42,7 +42,18 @@ class DataTablesController extends Controller
   }
 
   /**
-   * Return data for users.
+   * Return data for products.
+   *
+   * @return Json
+   */
+  public function getDataTablesProductsData() {
+    return Laratables::recordsOf(Product::class, function($query) {
+      return $query->whereStatus('publish');
+    });
+  }
+
+  /**
+   * Return data for categories.
    *
    * @return Json
    */

@@ -227,6 +227,7 @@
     <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
     <script src="{{ asset('assets/scripts/app.js') }}" defer></script>
+    <script src="{{ asset('assets/scripts/uploader.js') }}" defer></script>
     <script src="{{ asset('assets/scripts/admin.js') }}" defer></script>
     @yield('scripts')
 	</body>

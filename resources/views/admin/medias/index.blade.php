@@ -7,7 +7,7 @@
 
   <div class="row">
     <div class="col-12">
-      <table class="file-manager file-manager-list d-none is-datatable table-responsive" data-ajax="{{ route('admin.datatables.medias') }}" data-columns='[{"name" : "id", "orderable" : false, "searchable" : false}, {"name" : "title"}, {"name" : "size"}, {"name" : "type"}]'>
+      <table class="file-manager file-manager-list d-none is-datatable table-responsive" data-ajax="{{ route('admin.datatables.medias') }}" data-columns='[{"name" : "id", "orderable" : false, "searchable" : false}, {"name" : "title"}, {"name" : "size", "orderable" : false, "searchable" : false}, {"name" : "type", "orderable" : false, "searchable" : false}]'>
         <thead>
           <tr>
             <th colspan="5" class="text-left bg-white">

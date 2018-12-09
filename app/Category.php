@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 
+use Form;
+
 class Category extends Model
 {
   use Sluggable;
@@ -112,6 +114,18 @@ class Category extends Model
   }
 
   /**
+   * Returns truncated id for the datatables.
+   *
+   * @return string
+   */
+  public function laratablesId() {
+    return "<div class=\"custom-control custom-checkbox w-100 h-100\">
+              <input type=\"checkbox\" class=\"custom-control-input\" id=\"category-". str_slug($this->id) ."__checkbox\" value=\"". $this->id ."\">
+              <label class=\"custom-control-label w-100 h-100\" for=\"category-". str_slug($this->id) ."__checkbox\"></label>
+            </div>";
+  }
+
+  /**
    * Returns truncated thumbnail for the datatables.
    *
    * @return string
@@ -121,12 +135,26 @@ class Category extends Model
   }
 
   /**
-   * Returns the action column html for datatables.
+   * Returns the custom product title column html for datatables.
    *
    * @param \App\Category
    * @return string
    */
-  public static function laratablesCustomProductCategoriesAction($category) {
-    return view('admin.products.categories.action', compact('category'))->render();
+  public static function laratablesCustomProductTitle($category) {
+    $title = "<img src=\"". $category->thumbnail ."\" class=\"mr-2 rounded img-thumbnail table-thumbnail\"/> ";
+    $title .= $category->title;
+    $title .= Form::open([
+      'route'   => [
+        'admin.products.categories.destroy', $category
+      ],
+      'method'  => 'DELETE'
+    ]);
+      $title .= "<ul class=\"list-unstyled m-0 mt-2 d-flex\">";
+        $title .= "<li>". link_to_route('admin.products.categories.edit', "Edit", $category, ['class' => 'btn btn-link px-0 py-0 pr-2']) ."</li>";
+        $title .= "<li>". Form::bsButton('delete', $category->id, 'submit', ['title' => 'Delete', 'class' => 'btn-link text-danger px-0 py-0 pr-2']) ."</li>";
+      $title .= "</ul>";
+    $title .= Form::close();
+    
+    return $title;
   }
 }

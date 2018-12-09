@@ -50,22 +50,10 @@ class AdminProductCategoriesController extends Controller
                           ->merge(['type' => 'product'])
                           ->all());
 
-      if( $request->hasFile('thumbnail') ) : 
-        $thumbnail = $request->thumbnail;
-
-        $media = new Media([
-          'title'       => chop($thumbnail->getClientOriginalName(), '.'. $thumbnail->getClientOriginalExtension()),
-          'ext'         => $thumbnail->getClientOriginalExtension()
-        ]);
+      if( ! empty($request->_media) ) : 
+        $media = Media::findOrFail($request->_media);
 
         $category->medias()->save($media);
-
-        $media->addMeta([
-          'mime_type'   => $thumbnail->getMimeType(),
-          'size'        => $thumbnail->getClientSize()
-        ]);
-
-        $request->file('thumbnail')->storeAs($media->generateUploadLocation(), $category->medias->first()->media_file);
       endif;
 
       session()->flash('success', 'Product category has been added successfully.');
@@ -134,6 +122,6 @@ class AdminProductCategoriesController extends Controller
 
       session()->flash('deleted', 'Product category has been deleted.');
 
-      return redirect()->route('admin.products.categories.index');
+      return response()->json('success', 200);
     }
 }
