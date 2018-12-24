@@ -10,7 +10,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 use Form;
 
-class Product extends Model
+class Post extends Model
 {
   use SoftDeletes;
   use Sluggable;
@@ -58,6 +58,17 @@ class Product extends Model
   }
 
   /**
+   * Get the content.
+   *
+   * @param  string  $value
+   * @return string
+   */
+  public function getContentAttribute($value)
+  {
+    return base64_decode($value);
+  }
+
+  /**
    * Get featured image.
    */
   public function getFeaturedImageAttribute($value) {
@@ -72,29 +83,19 @@ class Product extends Model
   public function laratablesTitle()
   {
     $title = $this->featured_image ? "<img src=\"". Storage::url($this->featured_image[0]->thumbnail) ."\" class=\"img rounded mr-2\" width=\"50\" height=\"50\"/>" : "";
-    $title .= link_to_route('admin.products.edit', $this->title, $this);
+    $title .= link_to_route('admin.posts.edit', $this->title, $this);
     $title .= Form::open([
       'route'   => [
-        'admin.products.destroy', $this
+        'admin.posts.destroy', $this
       ],
       'method'  => 'DELETE'
     ]);
       $title .= "<ul class=\"list-unstyled m-0 mt-2 d-flex\">";
-        $title .= "<li>". link_to_route('admin.products.edit', "Edit", $this, ['class' => 'btn btn-link px-0 py-0 pr-2']) ."</li>";
+        $title .= "<li>". link_to_route('admin.posts.edit', "Edit", $this, ['class' => 'btn btn-link px-0 py-0 pr-2']) ."</li>";
         $title .= "<li>". Form::bsButton('delete', $this->id, 'submit', ['title' => 'Delete', 'class' => 'btn-link text-danger px-0 py-0 pr-2']) ."</li>";
       $title .= "</ul>";
     $title .= Form::close();
 
     return $title;
-  }
-
-  /**
-   * Returns truncated content for the datatables.
-   *
-   * @return string
-   */
-  public function laratablesContent()
-  {
-    return str_limit(base64_decode($this->content), 50);
   }
 }

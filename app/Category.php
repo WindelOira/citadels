@@ -41,6 +41,13 @@ class Category extends Model
   }
 
   /**
+   * Get all the post that are assigned to this category.
+   */
+  public function posts() {
+    return $this->morphedByMany('App\Post', 'categorizable');
+  }
+
+  /**
    * Get all the products that are assigned to this category.
    */
   public function products() {
@@ -132,6 +139,30 @@ class Category extends Model
    */
   public function laratablesTitle() {
     return "<img src=\"{$this->thumbnail}\" class=\"mr-2 rounded img-thumbnail table-thumbnail\"/> {$this->title}";
+  }
+
+  /**
+   * Returns the custom product title column html for datatables.
+   *
+   * @param \App\Category
+   * @return string
+   */
+  public static function laratablesCustomPostCategoryTitle($category) {
+    $title = "<img src=\"". $category->thumbnail ."\" class=\"mr-2 rounded img-thumbnail table-thumbnail\"/> ";
+    $title .= $category->title;
+    $title .= Form::open([
+      'route'   => [
+        'admin.posts.categories.destroy', $category
+      ],
+      'method'  => 'DELETE'
+    ]);
+      $title .= "<ul class=\"list-unstyled m-0 mt-2 d-flex\">";
+        $title .= "<li>". link_to_route('admin.posts.categories.edit', "Edit", $category, ['class' => 'btn btn-link px-0 py-0 pr-2']) ."</li>";
+        $title .= "<li>". Form::bsButton('delete', $category->id, 'submit', ['title' => 'Delete', 'class' => 'btn-link text-danger px-0 py-0 pr-2']) ."</li>";
+      $title .= "</ul>";
+    $title .= Form::close();
+    
+    return $title;
   }
 
   /**

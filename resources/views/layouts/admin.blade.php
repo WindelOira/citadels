@@ -51,6 +51,38 @@
   					<div class="nav-wrapper">
   						<h6 class="main-sidebar__nav-title">Dashboard</h6>
   						<ul class="nav nav--no-borders flex-column">
+                <li class="nav-item">
+                  <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <i class="material-icons">description</i>
+                    <span>Posts</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-small">
+                    <a class="dropdown-item " href="{{ route('admin.posts.index') }}">All Posts</a>
+                    <a class="dropdown-item " href="{{ route('admin.posts.create') }}">New Post</a>
+                    <a class="dropdown-item " href="{{ route('admin.posts.categories.index') }}">Categories</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <i class="material-icons">shopping_cart</i>
+                    <span>Products</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-small">
+                    <a class="dropdown-item " href="{{ route('admin.products.index') }}">All Products</a>
+                    <a class="dropdown-item " href="{{ route('admin.products.create') }}">New Product</a>
+                    <a class="dropdown-item " href="{{ route('admin.products.categories.index') }}">Product Categories</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <i class="material-icons">loyalty</i>
+                    <span>Orders</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-small">
+                    <a class="dropdown-item " href="{{ route('admin.orders.index') }}">All Orders</a>
+                    <a class="dropdown-item " href="{{ route('admin.orders.create') }}">New Order</a>
+                  </div>
+                </li>
   							<li class="nav-item dropdown">
   								<a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
   									<i class="material-icons">group</i>
@@ -70,27 +102,6 @@
   								<div class="dropdown-menu dropdown-menu-small">
   									<a class="dropdown-item" href="{{ route('admin.medias.index') }}">All Media</a>
   									<a class="dropdown-item" href="{{ route('admin.medias.create') }}">Upload Media</a>
-  								</div>
-  							</li>
-  							<li class="nav-item">
-  								<a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-  									<i class="material-icons">loyalty</i>
-  									<span>Orders</span>
-  								</a>
-  								<div class="dropdown-menu dropdown-menu-small">
-  									<a class="dropdown-item " href="{{ route('admin.orders.index') }}">All Orders</a>
-  									<a class="dropdown-item " href="{{ route('admin.orders.create') }}">New Order</a>
-  								</div>
-  							</li>
-  							<li class="nav-item">
-  								<a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-  									<i class="material-icons">shopping_cart</i>
-  									<span>Products</span>
-  								</a>
-  								<div class="dropdown-menu dropdown-menu-small">
-  									<a class="dropdown-item " href="{{ route('admin.products.index') }}">All Products</a>
-  									<a class="dropdown-item " href="{{ route('admin.products.create') }}">New Product</a>
-  									<a class="dropdown-item " href="{{ route('admin.products.categories.index') }}">Product Categories</a>
   								</div>
   							</li>
   							<li class="nav-item">

@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('content')
-  @page_header(['title' => 'Products'])
+  @page_header(['title' => 'Posts'])
     Categories
   @endpage_header
 
   <div class="row">
     <div class="col-lg-4">
       {!! Form::open([
-        'route'     => isset($category) ? ['admin.products.categories.update', $category] : 'admin.products.categories.store',
+        'route'     => isset($category) ? ['admin.posts.categories.update', $category] : 'admin.posts.categories.store',
         'method'    => isset($category) ? 'PUT' : 'POST',
         'files'     => TRUE,
       ]) !!}
@@ -34,7 +34,7 @@
       {!! Form::close() !!}
     </div>
     <div class="col-lg-8">
-      <table class="table table-sm table-striped is-datatable" data-ajax="{{ route('admin.datatables.products.categories') }}" data-columns='[{"name" : "id"}, {"name" : "product_title", "orderable" : false, "searchable" : false}, {"name" : "parent"}, {"name" : "slug"}]' data-single='true'>
+      <table class="table table-sm table-striped is-datatable" data-ajax="{{ route('admin.datatables.posts.categories') }}" data-columns='[{"name" : "id"}, {"name" : "post_category_title", "orderable" : false, "searchable" : false}, {"name" : "parent"}, {"name" : "slug"}]' data-info='false'>
         <thead>
           <tr>
             <th></th>

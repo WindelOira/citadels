@@ -21,6 +21,7 @@ mix
   // 'resources/assets/scripts/uploader.js',
 ], 'public/assets/scripts/admin.js')
 .styles([
+  'resources/assets/styles/main.css',
   'resources/assets/styles/admin.css'
 ], 'public/assets/styles/admin.css')
 .sass('resources/assets/sass/app.scss', 'public/assets/styles')

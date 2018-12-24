@@ -8,6 +8,7 @@ use App\Media;
 use App\Role;
 use App\User;
 use App\Category;
+use App\Post;
 use App\Product;
 
 use Freshbitsweb\Laratables\Laratables;
@@ -39,6 +40,28 @@ class DataTablesController extends Controller
    */
   public function getDataTablesUsersData() {
     return Laratables::recordsOf(User::class);
+  }
+
+  /**
+   * Return data for posts.
+   *
+   * @return Json
+   */
+  public function getDataTablesPostsData() {
+    return Laratables::recordsOf(Post::class, function($query) {
+      return $query->whereStatus('publish');
+    });
+  }
+
+  /**
+   * Return data for categories.
+   *
+   * @return Json
+   */
+  public function getDataTablesPostCategoriesData() {
+    return Laratables::recordsOf(Category::class, function($query) {
+      return $query->whereType('post');
+    });
   }
 
   /**

@@ -30,10 +30,14 @@ Route::name('admin.')->middleware(['auth'])->group(function() {
 	Route::resource('/admin/orders', 'AdminOrdersController');
   Route::name('products')->resource('/admin/products/categories', 'AdminProductCategoriesController');
 	Route::resource('/admin/products', 'AdminProductsController');
+  Route::name('posts')->resource('/admin/posts/categories', 'AdminPostsCategoriesController');
+  Route::resource('/admin/posts', 'AdminPostsController');
 
   Route::get('/admin/datatables/medias', 'DataTablesController@getDataTablesMediasData')->name('datatables.medias');
   Route::get('/admin/datatables/roles', 'DataTablesController@getDataTablesRolesData')->name('datatables.roles');
   Route::get('/admin/datatables/users', 'DataTablesController@getDataTablesUsersData')->name('datatables.users');
   Route::get('/admin/datatables/products', 'DataTablesController@getDataTablesProductsData')->name('datatables.products');
   Route::get('/admin/datatables/products/categories', 'DataTablesController@getDataTablesProductCategoriesData')->name('datatables.products.categories');
+  Route::get('/admin/datatables/posts', 'DataTablesController@getDataTablesPostsdata')->name('datatables.posts');
+  Route::get('/admin/datatables/posts/categories', 'DataTablesController@getDataTablesPostCategoriesData')->name('datatables.posts.categories');
 });

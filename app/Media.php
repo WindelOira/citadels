@@ -82,6 +82,13 @@ class Media extends Model
   }
 
   /**
+   * Get all posts for this media.
+   */
+  public function posts() {
+    return $this->morphedByMany('App\Post', 'mediaable');
+  }
+
+  /**
    * Get all products for this media.
    */
   public function products() {

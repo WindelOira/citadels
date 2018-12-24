@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-use App\Http\Requests\CategoriesRequests;
-use App\Media;
-use App\MediaMeta;
 use App\Category;
+use App\Media;
 
-class AdminProductCategoriesController extends Controller
+class AdminPostsCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,12 +19,12 @@ class AdminProductCategoriesController extends Controller
     {
       $parent = Category::whereNull('parent')
                 ->orWhere('parent', 0)
-                ->where('type', 'product')
+                ->where('type', 'post')
                 ->get()
                 ->pluck('title', 'id')
                 ->prepend('Select Parent Category');
 
-      return view('admin.products.categories.index', compact('parent'));
+      return view('admin.posts.categories', compact('parent'));
     }
 
     /**
@@ -35,7 +34,14 @@ class AdminProductCategoriesController extends Controller
      */
     public function create()
     {
-      return view('admin.products.categories.index');
+      $parent = Category::whereNull('parent')
+                ->orWhere('parent', 0)
+                ->where('type', 'post')
+                ->get()
+                ->pluck('title', 'id')
+                ->prepend('Select Parent Category');
+
+      return view('admin.posts.categories', compact('parent'));
     }
 
     /**
@@ -44,21 +50,22 @@ class AdminProductCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoriesRequests $request)
+    public function store(Request $request)
     {
-      $category = Category::create($request
-                          ->merge(['type' => 'product'])
-                          ->all());
+      $data = $request->all();
+      $data['type'] = 'post';
 
-      if( ! empty($request->_media) ) : 
+      $category = Category::create($data);
+
+      if( ! empty($request->_media) ) :
         $media = Media::findOrFail($request->_media);
 
-        $category->medias()->save($media);
+        $media->categories()->save($category);
       endif;
 
       session()->flash('success', 'Product category has been added successfully.');
 
-      return redirect()->route('admin.products.categories.index');
+      return redirect()->route('admin.posts.categories.index');
     }
 
     /**
@@ -69,7 +76,7 @@ class AdminProductCategoriesController extends Controller
      */
     public function show($id)
     {
-      return Category::findOrFail($id)->media;
+        //
     }
 
     /**
@@ -80,15 +87,16 @@ class AdminProductCategoriesController extends Controller
      */
     public function edit($id)
     {
+      $category = Category::findOrFail($id);
+
       $parent = Category::whereNull('parent')
-                ->where('type', 'product')
+                ->orWhere('parent', 0)
+                ->where('type', 'post')
                 ->get()
                 ->pluck('title', 'id')
                 ->prepend('Select Parent Category');
 
-      $category = Category::findOrFail($id);
-
-      return view('admin.products.categories.index', compact('parent', 'category'));
+      return view('admin.posts.categories', compact('category', 'parent'));
     }
 
     /**
@@ -98,22 +106,28 @@ class AdminProductCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoriesRequests $request, $id)
+    public function update(Request $request, $id)
     {
+      $category = Category::findOrFail($id);
+
       $data = $request->all();
-      $data['type'] = 'product';
+      $data['type'] = 'post';
 
-      Category::findOrFail($id)->update($data);
+      $category->update($data);
 
-      if( ! empty($request->_media) ) : 
+      if( ! empty($request->_media) ) :
         $media = Media::findOrFail($request->_media);
-
-        $category->medias()->save($media);
+        
+        DB::table('mediaables')
+          ->whereMediaableId($category->id)
+          ->update([
+            'media_id'  => $request->_media
+          ]);
       endif;
 
-      session()->flash('success', 'Product category has been updated successfully.');
+      session()->flash('success', 'Post category has been updated successfully.');
 
-      return redirect()->route('admin.products.categories.index');
+      return redirect()->route('admin.posts.categories.index');
     }
 
     /**
