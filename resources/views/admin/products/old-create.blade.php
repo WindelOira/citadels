@@ -63,48 +63,6 @@
       <!-- / Actions -->
       <!-- Categories -->
       <admin-categories type="product"></admin-categories>
-      <div class="card card-small mb-3">
-        <div class="card-header border-bottom">
-          <h6 class="m-0">Categories</h6>
-        </div>
-        <div class="card-body p-0">
-          <ul class="list-group list-group-flush">
-          @if( count($categories) > 0 )
-            <li class="list-group-item px-3 pb-2">
-              @foreach( $categories as $category )
-              <div class="custom-control custom-checkbox mb-1">
-                {{ Form::checkbox('categories[]', $category->id, false, ['id' => str_slug($category->title), 'class' => 'custom-control-input']) }}
-                <label class="custom-control-label" for="{{ str_slug($category->title) }}">{{ $category->title }}</label>
-              </div>
-              @if( $category->isParent() && $category->hasChildren() )
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item px-3 pb-2">
-                  @foreach( $category->getChildren() as $child )
-                  <div class="custom-control custom-checkbox mb-1">
-                    {{ Form::checkbox('categories[]', $child->id, false, ['id' => str_slug($child->title), 'class' => 'custom-control-input']) }}
-                    
-                    <label class="custom-control-label" for="{{ str_slug($child->title) }}">{{ $child->title }}</label>
-                  </div>
-                  @endforeach
-                </li>
-              </ul>
-              @endif
-              @endforeach
-            </li>
-          @endif
-            <li class="list-group-item d-flex px-3">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="New category" aria-label="Add new category" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-white px-2" type="button">
-                    <i class="material-icons">add</i>
-                  </button>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
       <!-- / Categories -->
       <!-- Featured Image -->
       <div class="card card-small mb-3">
